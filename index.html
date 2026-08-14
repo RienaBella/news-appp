@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="NewsPulse keeps daily headlines fast, clear and easy to understand." />
+    <title>NewsPulse | Real-time News Brief</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <div class="container topbar-inner">
+          <div class="brand-wrap">
+            <div class="brand-mark">N</div>
+            <div>
+              <div class="brand-name">NewsPulse</div>
+              <div class="brand-tag">Daily Brief</div>
+            </div>
+          </div>
+
+          <div class="search-wrap">
+            <span class="icon">⌕</span>
+            <input id="searchInput" type="search" placeholder="Search headlines, topics, stories..." aria-label="Search news" />
+          </div>
+
+          <div class="utility-actions">
+            <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+            <button id="mobileMenuToggle" class="mobile-menu-toggle" aria-label="Open navigation" aria-expanded="false">☰</button>
+            <button class="primary-btn" id="newsletterCta">Get updates</button>
+          </div>
+        </div>
+      </header>
+
+      <div class="ticker-wrap">
+        <div class="container ticker-inner">
+          <span class="ticker-label">Breaking</span>
+          <div class="ticker-track" id="tickerTrack"></div>
+        </div>
+      </div>
+
+      <main class="container">
+        <nav class="category-nav" id="categoryNav" aria-label="News categories">
+          <button class="category-chip active" data-category="all">All</button>
+          <button class="category-chip" data-category="Nigeria">Nigeria</button>
+          <button class="category-chip" data-category="World">World</button>
+          <button class="category-chip" data-category="Technology">Technology</button>
+          <button class="category-chip" data-category="Sports">Sports</button>
+          <button class="category-chip" data-category="Entertainment">Entertainment</button>
+          <button class="category-chip" data-category="Business">Business</button>
+          <button class="category-chip" data-category="Science">Science</button>
+        </nav>
+
+        <div id="errorBanner" class="alert-banner hidden" role="alert"></div>
+
+        <section class="hero-grid">
+          <article id="featuredStory" class="featured-story-card"></article>
+
+          <aside class="side-panel">
+            <div class="panel-header">
+              <h3>Trending</h3>
+              <span class="muted">What people are reading</span>
+            </div>
+            <div id="trendingList" class="trending-list"></div>
+          </aside>
+        </section>
+
+        <section class="section-block">
+          <div class="section-heading-row">
+            <h2>Quick Brief</h2>
+            <span class="muted">Fast explainers from the newsroom</span>
+          </div>
+          <div id="quickBriefGrid" class="quick-brief-grid"></div>
+        </section>
+
+        <section class="split-layout">
+          <div class="news-feed-wrap">
+            <div class="section-heading-row">
+              <h2>Latest news</h2>
+              <span id="newsMeta" class="muted"></span>
+            </div>
+            <div id="loadingIndicator" class="loading-state hidden">Loading top stories...</div>
+            <div id="newsFeed" class="news-feed"></div>
+          </div>
+
+          <aside class="sidebar-stack">
+            <div class="panel-block">
+              <div class="panel-header">
+                <h3>News Radar</h3>
+                <span class="muted">Biggest stories now</span>
+              </div>
+              <div id="radarGrid" class="radar-grid"></div>
+            </div>
+
+            <div class="panel-block">
+              <div class="panel-header">
+                <h3>Read Later</h3>
+                <span class="muted">Saved stories</span>
+              </div>
+              <div id="savedStories" class="saved-stories"></div>
+            </div>
+          </aside>
+        </section>
+
+        <section class="section-block">
+          <div class="section-heading-row">
+            <h2>What’s trending</h2>
+            <span class="muted">Most discussed and most important</span>
+          </div>
+          <div id="popularStories" class="popular-story-row"></div>
+        </section>
+
+        <section class="newsletter-panel">
+          <div>
+            <span class="eyebrow">Weekly briefing</span>
+            <h2>Get the NewsPulse morning brief</h2>
+            <p>Insightful summaries, analysis, and must-read stories delivered every weekday.</p>
+          </div>
+          <form id="newsletterForm" class="newsletter-form">
+            <input id="newsletterInput" type="email" placeholder="Your email address" aria-label="Email address" required />
+            <button type="submit" class="primary-btn">Subscribe</button>
+          </form>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="container footer-grid">
+          <div>
+            <div class="brand-wrap compact">
+              <div class="brand-mark">N</div>
+              <div>
+                <div class="brand-name">NewsPulse</div>
+              </div>
+            </div>
+            <p>Smart news coverage that helps you understand what matters now.</p>
+          </div>
+
+          <div>
+            <h4>Topics</h4>
+            <ul>
+              <li>Nigeria</li>
+              <li>World</li>
+              <li>Technology</li>
+              <li>Business</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4>Company</h4>
+            <ul>
+              <li>About</li>
+              <li>Contact</li>
+              <li>Advertise</li>
+              <li>Careers</li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <div id="articleModal" class="modal hidden" aria-hidden="true">
+      <div class="modal-backdrop" data-close="true"></div>
+      <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <button class="close-modal" aria-label="Close article">×</button>
+        <img id="modalImage" src="" alt="Article preview" />
+        <div class="modal-content">
+          <div class="modal-meta">
+            <span id="modalCategory" class="pill"></span>
+            <span id="modalSource" class="muted"></span>
+            <span id="modalDate" class="muted"></span>
+          </div>
+          <h2 id="modalTitle"></h2>
+          <p id="modalSummary" class="modal-summary"></p>
+          <div class="detail-block">
+            <h3>Quick Brief</h3>
+            <p id="modalQuickBrief"></p>
+          </div>
+          <div class="detail-block">
+            <h3>Why It Matters</h3>
+            <p id="modalWhyMatters"></p>
+          </div>
+          <div class="modal-actions">
+            <button id="modalSaveBtn" class="primary-btn">Save article</button>
+            <a id="modalLink" href="#" target="_blank" rel="noreferrer" class="ghost-btn">Read original</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
